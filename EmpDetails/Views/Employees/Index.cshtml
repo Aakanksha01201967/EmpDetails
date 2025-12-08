@@ -1,0 +1,105 @@
+﻿@* @model IEnumerable<EmpDetails.Models.EmployeeDepartmentViewModel>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h2>Employees</h2>
+
+<!-- Create New button -->
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>State</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Salary</td>
+                <td>@item.State</td>
+                <td>@item.DepartmentName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmpID">Edit</a> |
+                    @* <a asp-action="Details" asp-route-id="@item.EmpID">Details</a> | *@
+            @*         <a asp-action="Delete" asp-route-id="@item.EmpID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@ 
+
+@model IEnumerable<EmpDetails.Models.EmployeeDepartmentViewModel>
+
+@{
+    ViewBag.Title = "Employees";
+}
+
+<h2>Employees</h2>
+
+<!-- Create New button -->
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<!-- Search form -->
+<form asp-action="Index" method="get">
+    <p>
+        Search: <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewBag.NameSortParm"
+                   asp-route-searchString="@ViewBag.CurrentFilter">Name</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewBag.EmailSortParm"
+                   asp-route-searchString="@ViewBag.CurrentFilter">Email</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewBag.SalarySortParm"
+                   asp-route-searchString="@ViewBag.CurrentFilter">Salary</a>
+            </th>
+            <th>State</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Salary</td>
+                <td>@item.State</td>
+                <td>@item.DepartmentName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmpID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EmpID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
